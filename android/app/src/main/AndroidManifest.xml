@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.agora_example_test">
    <application
-        android:label="TT Swayam"
+        android:label="Communication"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
