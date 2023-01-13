@@ -1,5 +1,6 @@
 import 'package:agora_example_test/communication/logic/agora_av_manager/agora_av_manager_cubit.dart';
 import 'package:agora_example_test/communication/logic/av_controller/av_controller_cubit.dart';
+import 'package:agora_example_test/communication/screens/chat_screen.dart';
 import 'package:agora_example_test/communication/screens/video_communication_screen.dart';
 import 'package:agora_example_test/communication/screens/voice_communication_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Talk to Swayam'),
+        title: const Text('Communication'),
       ),
       body: Center(
         child: Column(
@@ -74,6 +75,17 @@ class _MyAppState extends State<MyApp> {
               },
               child: const Text("Voice call"),
             ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ChatScreen(),
+                  ),
+                );
+              },
+              child: const Text("Chat"),
+            )
           ],
         ),
       ),
