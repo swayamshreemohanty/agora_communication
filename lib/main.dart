@@ -1,4 +1,5 @@
 import 'package:agora_example_test/communication/logic/agora_av_manager/agora_av_manager_cubit.dart';
+import 'package:agora_example_test/communication/logic/agora_chat_manager/agora_chat_manager_cubit.dart';
 import 'package:agora_example_test/communication/logic/av_controller/av_controller_cubit.dart';
 import 'package:agora_example_test/communication/screens/chat_screen.dart';
 import 'package:agora_example_test/communication/screens/video_communication_screen.dart';
@@ -80,7 +81,10 @@ class _MyAppState extends State<MyApp> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const ChatScreen(),
+                    builder: (context) => BlocProvider(
+                      create: (context) => AgoraChatManagerCubit(),
+                      child: const ChatScreen(),
+                    ),
                   ),
                 );
               },
