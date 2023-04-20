@@ -1,8 +1,8 @@
+import 'package:agora_example_test/communication/model/agora_creds_model.dart';
 import 'package:agora_example_test/communication/model/agora_engine_type_enum.dart';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 part 'agora_av_manager_state.dart';
@@ -10,20 +10,9 @@ part 'agora_av_manager_state.dart';
 class AgoraAvManagerCubit extends Cubit<AgoraAvManagerState> {
   AgoraAvManagerCubit() : super(LoadingAgoraAVManager());
 
-  //config file
-  final appId = "c515c8ebf3314ff891288bad02137740";
-  final videoToken =
-      "007eJxTYJjFzzTPo/W8ULP985yrM0U9s14WbbSWsJkjf06MdY2IQagCQ7KpoWmyRWpSmrGxoUlamoWloZGFRVJiioGRobG5uYmB+tH9yQ2BjAzsfpYMjFAI4nMzJKbnFyXGl2WmpOYzMAAAIF8eNg==";
-  final videoChannel = "agora_video";
-
-  final audioToken =
-      "007eJxTYOitfDmhS6960ZnvnxOnvWJy9roY3r3xp6ddQZA2o1aHnpYCQ7KpoWmyRWpSmrGxoUlamoWloZGFRVJiioGRobG5uYlB4tH9yQ2BjAzxO4xYGRkgEMTnZkhMzy9KjC/Lz0xOZWAAAD6rIb8=";
-  final audioChannel = "agora_voice";
-  //
-
   RtcEngine? _engine;
 
-  void engineConnected({
+  void _engineConnected({
     required bool localUserConencted,
     int? remoteUserUID,
     required String channelId,
@@ -47,6 +36,7 @@ class AgoraAvManagerCubit extends Cubit<AgoraAvManagerState> {
 
   Future<void> initializeRTCEngine(
     RtcEngine engine, {
+    required AgoraCredentialsModel agoraCredentialsModel,
     required AgoraEngineType agoraEngineType,
   }) async {
     try {
@@ -55,23 +45,21 @@ class AgoraAvManagerCubit extends Cubit<AgoraAvManagerState> {
       await [Permission.microphone, Permission.camera].request();
 
       await _engine!.initialize(RtcEngineContext(
-        appId: appId,
+        appId: agoraCredentialsModel.appId,
         channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
       ));
-      final channelId = agoraEngineType == AgoraEngineType.video
-          ? videoChannel
-          : audioChannel;
+      final channelId = agoraCredentialsModel.channelName;
       _engine!.registerEventHandler(
         RtcEngineEventHandler(
           onJoinChannelSuccess: (RtcConnection connection, int elapsed) {
-            engineConnected(
+            _engineConnected(
               localUserConencted: true,
               channelId: channelId,
               rtcEngine: _engine!,
             );
           },
           onUserJoined: (RtcConnection connection, int remoteUid, int elapsed) {
-            engineConnected(
+            _engineConnected(
               localUserConencted: true,
               remoteUserUID: remoteUid,
               channelId: channelId,
@@ -80,7 +68,7 @@ class AgoraAvManagerCubit extends Cubit<AgoraAvManagerState> {
           },
           onUserOffline: (RtcConnection connection, int remoteUid,
               UserOfflineReasonType reason) {
-            engineConnected(
+            _engineConnected(
               localUserConencted: true,
               remoteUserUID: null, //set remote id to null
               channelId: channelId,
@@ -89,7 +77,7 @@ class AgoraAvManagerCubit extends Cubit<AgoraAvManagerState> {
           },
           onLeaveChannel: (connection, stats) {
             // _remoteUid = null;
-            engineConnected(
+            _engineConnected(
               localUserConencted: true,
               remoteUserUID: null, //set remote id to null
               channelId: channelId,
@@ -97,7 +85,7 @@ class AgoraAvManagerCubit extends Cubit<AgoraAvManagerState> {
             );
           },
           onUserMuteAudio: (connection, remoteUid, muted) {
-            engineConnected(
+            _engineConnected(
               localUserConencted: true,
               remoteUserUID: remoteUid,
               channelId: channelId,
@@ -106,7 +94,7 @@ class AgoraAvManagerCubit extends Cubit<AgoraAvManagerState> {
             );
           },
           onUserMuteVideo: (connection, remoteUid, muted) {
-            engineConnected(
+            _engineConnected(
               localUserConencted: true,
               remoteUserUID: remoteUid,
               channelId: channelId,
@@ -118,7 +106,7 @@ class AgoraAvManagerCubit extends Cubit<AgoraAvManagerState> {
           //TODO:Need to check
           // onRejoinChannelSuccess: (connection, elapsed) {
           //   Fluttertoast.showToast(msg: "Remote user $elapsed re joined");
-          //   engineConnected(
+          //   _engineConnected(
           //     localUserConencted: true,
           //     remoteUserUID: elapsed,
           //     channelId: channel,
@@ -136,8 +124,7 @@ class AgoraAvManagerCubit extends Cubit<AgoraAvManagerState> {
         await _engine!.startPreview();
       }
       await _engine!.joinChannel(
-        token:
-            agoraEngineType == AgoraEngineType.video ? videoToken : audioToken,
+        token: agoraCredentialsModel.token,
         channelId: channelId,
         uid: 0,
         options: const ChannelMediaOptions(),

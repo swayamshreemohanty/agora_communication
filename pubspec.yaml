@@ -18,7 +18,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
-  fluttertoast: ^8.1.2
+  fluttertoast: ^8.2.1
   permission_handler: ^10.2.0
 
 dev_dependencies:
