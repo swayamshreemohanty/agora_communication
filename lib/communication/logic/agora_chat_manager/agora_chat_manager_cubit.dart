@@ -138,7 +138,6 @@ class AgoraChatManagerCubit extends Cubit<AgoraChatManagerState> {
           break;
       }
     }
-    print("########################");
     emitMessage();
   }
 }
