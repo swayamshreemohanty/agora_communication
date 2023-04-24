@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:agora_communication/communication/logic/agora_av_manager/agora_av_manager_cubit.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:agora_example_test/communication/logic/agora_av_manager/agora_av_manager_cubit.dart';
 
 part 'av_controller_state.dart';
 

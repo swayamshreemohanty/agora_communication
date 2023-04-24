@@ -1,10 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:agora_example_test/communication/logic/agora_av_manager/agora_av_manager_cubit.dart';
-import 'package:agora_example_test/communication/logic/av_controller/av_controller_cubit.dart';
-import 'package:agora_example_test/communication/model/agora_creds_model.dart';
-import 'package:agora_example_test/communication/screens/video_communication_screen.dart';
-import 'package:agora_example_test/communication/screens/voice_communication_screen.dart';
+import 'package:agora_communication/communication/logic/agora_av_manager/agora_av_manager_cubit.dart';
+import 'package:agora_communication/communication/logic/av_controller/av_controller_cubit.dart';
+import 'package:agora_communication/communication/model/agora_creds_model.dart';
+import 'package:agora_communication/communication/screens/video_communication_screen.dart';
+import 'package:agora_communication/communication/screens/voice_communication_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';

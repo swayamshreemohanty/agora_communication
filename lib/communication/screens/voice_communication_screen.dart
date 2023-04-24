@@ -1,12 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:agora_communication/communication/logic/agora_av_manager/agora_av_manager_cubit.dart';
+import 'package:agora_communication/communication/logic/av_controller/av_controller_cubit.dart';
+import 'package:agora_communication/communication/model/agora_creds_model.dart';
+import 'package:agora_communication/communication/model/agora_engine_type_enum.dart';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:agora_example_test/communication/logic/agora_av_manager/agora_av_manager_cubit.dart';
-import 'package:agora_example_test/communication/logic/av_controller/av_controller_cubit.dart';
-import 'package:agora_example_test/communication/model/agora_creds_model.dart';
-import 'package:agora_example_test/communication/model/agora_engine_type_enum.dart';
 
 class VoiceCommunicationScreen extends StatefulWidget {
   final AgoraCredentialsModel agoraCredentialsModel;

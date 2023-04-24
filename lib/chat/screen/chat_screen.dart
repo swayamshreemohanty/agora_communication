@@ -1,7 +1,7 @@
 import 'package:agora_chat_sdk/agora_chat_sdk.dart';
-import 'package:agora_example_test/chat/logic/agora_chat_manager/agora_chat_manager_cubit.dart';
-import 'package:agora_example_test/communication/widget/chat/message_bubble.dart';
-import 'package:agora_example_test/communication/widget/chat/new_message.dart';
+import 'package:agora_communication/chat/logic/agora_chat_manager/agora_chat_manager_cubit.dart';
+import 'package:agora_communication/communication/widget/chat/message_bubble.dart';
+import 'package:agora_communication/communication/widget/chat/new_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';

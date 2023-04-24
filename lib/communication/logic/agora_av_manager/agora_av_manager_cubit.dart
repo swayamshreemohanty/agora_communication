@@ -1,5 +1,5 @@
-import 'package:agora_example_test/communication/model/agora_creds_model.dart';
-import 'package:agora_example_test/communication/model/agora_engine_type_enum.dart';
+import 'package:agora_communication/communication/model/agora_creds_model.dart';
+import 'package:agora_communication/communication/model/agora_engine_type_enum.dart';
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
